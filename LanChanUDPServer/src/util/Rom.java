@@ -43,10 +43,14 @@ public class Rom extends Modules {
 				ListRoomUser.get("General").addAll(SqlRequeteUser());
 				message.messageReceive.Msg = new ObjectMapper().writerWithDefaultPrettyPrinter()
 						.writeValueAsString(ListRoomUser);
+				message.messageReceive.To = message.messageReceive.From;
+				message.messageReceive.From="Server";
 				System.out.println(message);
+
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
+				return false;
 			}
 
 		case ROOM_QUIT:

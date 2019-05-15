@@ -30,8 +30,7 @@ public class Auth extends Modules {
 
 	public Boolean Update(PackMessage message) {
 		System.out.println("--Module Auth--");
-		message.messageReceive.To = message.messageReceive.From;
-		message.messageReceive.From="Server";
+
 		
 		switch (message.messageReceive.header) {
 		case AUTH:
@@ -40,6 +39,8 @@ public class Auth extends Modules {
 				if (!result.next()) {
 					System.out.println("ERROR : Authentification");
 					message.messageReceive.Msg = "FALSE";
+					message.messageReceive.To = message.messageReceive.From;
+					message.messageReceive.From="Server";
 					System.out.println(message);
 					return true;
 
@@ -49,7 +50,8 @@ public class Auth extends Modules {
 					//message.messageReceive.From="Server";
 					System.out.println(message);
 					insertToConnectTable(message.messageReceive.From, message.messageReceive.token, message.IpSender);
-
+					message.messageReceive.To = message.messageReceive.From;
+					message.messageReceive.From="Server";
 					return true;
 				}
 			} catch (Exception e) {
@@ -60,8 +62,8 @@ public class Auth extends Modules {
 			System.out.println("-- User Disconnected");
 			DeleteFromConnectTable(message.messageReceive.From, message.messageReceive.token, message.IpSender);
 			message.messageReceive.Msg = "Disconnect";
-			//message.messageReceive.To = message.messageReceive.From;
-			//message.messageReceive.From = "Server";
+			message.messageReceive.To = message.messageReceive.From;
+			message.messageReceive.From="Server";
 			return true;
 
 		default:
