@@ -1,6 +1,7 @@
 package util;
 
 import java.net.*;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +24,17 @@ public class PackMessage {
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {
-			Message messRecep = mapper.readValue(_databyte, Message.class);
+			
+			String str = new String(_databyte,"UTF-8");			
+			byte[] data = str.getBytes(Charset.forName("UTF-8"));
+			Message messRecep = mapper.readValue(data, Message.class);
+			
+			
+			//Message messRecep = mapper.readValue(_databyte, Message.class);
+			/*if(messRecep.Msg !=null || messRecep.Msg.length()!= 0) {
+			byte[] data = messRecep.Msg.getBytes(Charset.forName("UTF-8"));
+			messRecep.Msg = new String(data,"UTF-8");
+			}*/
 			return messRecep;
 		} catch (Exception e) {
 			e.printStackTrace();

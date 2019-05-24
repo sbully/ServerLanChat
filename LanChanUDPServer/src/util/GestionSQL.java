@@ -21,11 +21,11 @@ public final class GestionSQL {
 
 		try {
 			con = DriverManager.getConnection(_url, _util, _pass);
-			System.out.println("la connexion est établie");
+			System.out.println("la connexion est Ã©tablie");
 			return con;
 
 		} catch (Exception e) {
-			System.out.println("la connexion a échoué");
+			System.out.println("la connexion a Ã©chouÃ©");
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 			return null;
@@ -35,7 +35,7 @@ public final class GestionSQL {
 	/*public void UpdateTable() {
 		try {
 			Statement stm = con.createStatement();
-			stm.executeUpdate("INSERT INTO adherent VALUES(8,'BULLY','Sebastien', '6 rue Des paumés')");
+			stm.executeUpdate("INSERT INTO adherent VALUES(8,'BULLY','Sebastien', '6 rue Des paumï¿½s')");
 			stm.close();
 		} catch (Exception e) {
 			System.out.println("ECHEC de l'ajout");
@@ -52,7 +52,7 @@ public final class GestionSQL {
 			Statement stm = con.createStatement();
 			ResultSet resultat = stm.executeQuery(req);
 			// stm.close();
-			System.out.println("SELECTION Réussi");
+			System.out.println("SELECTION RÃ©ussi");
 			return resultat;
 
 		} catch (Exception e) {

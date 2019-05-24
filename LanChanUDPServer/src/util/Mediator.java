@@ -1,6 +1,7 @@
 package util;
 
 import java.net.*;
+import java.nio.charset.Charset;
 
 
 public class Mediator {
@@ -12,9 +13,8 @@ public class Mediator {
 	
 	public static void Traitement(byte[] _receipMess, InetAddress IpSender) {
 		try {
-
 			PackMessage receivPack = new PackMessage(_receipMess, IpSender);
-
+			System.out.println(receivPack);
 			
 			Boolean test= module.Update(receivPack);
 			//receivPack.messageReceive.From= "192.168.221.220";
@@ -26,6 +26,7 @@ public class Mediator {
 				InetAddress adresse = InetAddress.getByName("192.168.221.255");
 				int port = 1000;
 				
+				//byte[] data = receivPack.JsonSerie().getBytes(Charset.forName("UTF-8"));
 				byte[] data = receivPack.JsonSerie().getBytes();
 				DatagramPacket dataPack = new DatagramPacket(data, data.length, adresse, port);
 				dataPack.setData(data);
