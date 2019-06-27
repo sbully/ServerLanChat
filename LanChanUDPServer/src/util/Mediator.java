@@ -1,17 +1,16 @@
 package util;
 
 import java.net.*;
-import java.nio.charset.Charset;
 
 
 public class Mediator {
 
-	private static Modules module = new Logs(new Auth(new Rom(null)));
+	private Modules module = new Logs(new Auth(new Room(null)));
 
 
 
 	
-	public static void Traitement(byte[] _receipMess, InetAddress IpSender) {
+	public void Traitement(byte[] _receipMess, InetAddress IpSender) {
 		try {
 			PackMessage receivPack = new PackMessage(_receipMess, IpSender);
 			System.out.println(receivPack);

@@ -4,7 +4,7 @@ import java.sql.*;
 
 public final class GestionSQL {
 
-	static Connection con;
+	static Connection connectSQL;
 
 	public static void LoadDriver() {
 		try {
@@ -20,9 +20,9 @@ public final class GestionSQL {
 	public static Connection GetConnexion(String _url, String _util, String _pass) {
 
 		try {
-			con = DriverManager.getConnection(_url, _util, _pass);
+			connectSQL = DriverManager.getConnection(_url, _util, _pass);
 			System.out.println("la connexion est établie");
-			return con;
+			return connectSQL;
 
 		} catch (Exception e) {
 			System.out.println("la connexion a échoué");
@@ -44,7 +44,7 @@ public final class GestionSQL {
 		}
 	}*/
 
-	public ResultSet SelectTable(String req) {
+	/*public ResultSet SelectTable(String req) {
 
 		// String req = "SELECT "+_champSelect+" FROM "+ _table;
 
@@ -61,12 +61,12 @@ public final class GestionSQL {
 			System.out.println(e.getStackTrace());
 			return null;
 		}
-	}
-
+	}*/
+/*
 	public static ResultSet PrepareSelectConnectTable(String _pseudo) {
 
 		try {
-			PreparedStatement stm = con.prepareStatement("SELECT Pseudo, Token, Ip FROM userconnect WHERE Pseudo=?");
+			PreparedStatement stm = connectSQL.prepareStatement("SELECT Pseudo, Token, Ip FROM userconnect WHERE Pseudo=?");
 			stm.setString(1, _pseudo);
 			ResultSet rs = stm.executeQuery();
 			return rs;
@@ -79,12 +79,11 @@ public final class GestionSQL {
 		}
 
 	}
-
+*/
 	public static ResultSet PrepareSelectUtilTable(String _pseudo, String _pass) {
 
 		try {
-			PreparedStatement stm = con
-					.prepareStatement("SELECT Pseudo, Passwrd FROM utilisateurs WHERE Pseudo=? AND Passwrd=? ");
+			PreparedStatement stm = connectSQL.prepareStatement("SELECT Pseudo, Passwrd FROM utilisateurs WHERE Pseudo=? AND Passwrd=? ");
 			stm.setString(1, _pseudo);
 			stm.setString(2, _pass);
 			ResultSet rs = stm.executeQuery();
@@ -101,7 +100,7 @@ public final class GestionSQL {
 
 	public static void insertToConnectTable(String _pseudo, String _token, String _Ip) {
 		try {
-			PreparedStatement stm = con.prepareStatement("INSERT INTO userconnect (Pseudo,Token,Ip) Value(?,?,?) ON DUPLICATE KEY UPDATE Ip=?");
+			PreparedStatement stm = connectSQL.prepareStatement("INSERT INTO userconnect (Pseudo,Token,Ip) Value(?,?,?) ON DUPLICATE KEY UPDATE Ip=?");
 			stm.setString(1, _pseudo);
 			stm.setString(2, _token);
 			stm.setString(3, _Ip);
@@ -116,9 +115,9 @@ public final class GestionSQL {
 
 	}
 
-	public static void DeleteFromConnectTable(String _pseudo, String _token, String _Ip) {
+	public static void deleteFromConnectTable(String _pseudo, String _token, String _Ip) {
 		try {
-			PreparedStatement stm = con.prepareStatement("DELETE FROM userconnect WHERE Pseudo=? AND Token=? AND Ip=?");
+			PreparedStatement stm = connectSQL.prepareStatement("DELETE FROM userconnect WHERE Pseudo=? AND Token=? AND Ip=?");
 			stm.setString(1, _pseudo);
 			stm.setString(2, _token);
 			stm.setString(3,_Ip);
@@ -132,16 +131,13 @@ public final class GestionSQL {
 	
 	public static ResultSet SelectFromConnectTable() {
 		try {
-			PreparedStatement stm = con.prepareStatement("SELECT Pseudo FROM userconnect");
+			PreparedStatement stm = connectSQL.prepareStatement("SELECT Pseudo FROM userconnect");
 			return stm.executeQuery();	
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;	
 		}
-		
-		
-
-		
+	
 	}
 
 }

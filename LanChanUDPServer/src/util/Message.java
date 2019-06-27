@@ -10,14 +10,14 @@ public class Message {
 	public String token;
 	public String From;
 	public String To;
-	public String Msg;
+	public String msg;
 	
 	public Message() {
 		header = MessageHeader.AUTH;
         date = new Date();
 	}
 	
-	
+
 	public Message(String token, String from) {
 		this.date = new Date();
 		this.token = token;
@@ -35,11 +35,12 @@ public class Message {
 			
 		}
 		
-		StrBuff.append(": ").append(Msg);
+		StrBuff.append(": ").append(msg);
 		
 		return StrBuff.toString();
 	}
 	
+
 	public String toLogs() {
 
 		DateFormat shortDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
@@ -50,7 +51,7 @@ public class Message {
 			StrBuff.append(" (").append(To).append("]");
 		}
 		
-		StrBuff.append(": ").append(Msg);
+		StrBuff.append(": ").append(msg);
 		
 		return StrBuff.toString();
 		

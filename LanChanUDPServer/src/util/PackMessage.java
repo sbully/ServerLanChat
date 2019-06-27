@@ -55,7 +55,7 @@ public class PackMessage {
 			StrBuff.append(" (").append(this.messageReceive.To).append(")");
 		}
 
-		StrBuff.append(": ").append(this.messageReceive.Msg);
+		StrBuff.append(": ").append(this.messageReceive.msg);
 
 		return StrBuff.toString();
 

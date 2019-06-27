@@ -3,24 +3,29 @@ package util;
 import static util.GestionSQL.SelectFromConnectTable;
 
 import java.sql.ResultSet;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Rom extends Modules {
+import javafx.collections.FXCollections;
 
-	static List<String> GeneralUser = new ArrayList<String>();
-	static List<String> RoomAlphaUser = new ArrayList<String>();
-	static List<String> RoomBetaUser = new ArrayList<String>();
-	static List<String> RoomGammaUser = new ArrayList<String>();
 
-	static Map<String, List<String>> ListRoomUser = new HashMap<String, List<String>>();
+public class Room extends Modules {
 
-	public Rom(Modules _next) {
+	static ObservableList<String> GeneralUser = FXCollections.observableArrayList();
+	static ObservableList<String> RoomAlphaUser = FXCollections.observableArrayList();
+	static ObservableList<String> RoomBetaUser = FXCollections.observableArrayList();
+	static ObservableList<String> RoomGammaUser = FXCollections.observableArrayList();
+
+	static Map<String, ObservableList<String>> ListRoomUser = new HashMap<String, ObservableList<String>>();
+
+	public Room(Modules _next) {
 		this.next = null;
 		RoomAlphaUser.add("Tete");
 		RoomAlphaUser.add("Tutu");
@@ -41,7 +46,7 @@ public class Rom extends Modules {
 			try {
 				ListRoomUser.get("General").clear();
 				ListRoomUser.get("General").addAll(SqlRequeteUser());
-				message.messageReceive.Msg = new ObjectMapper().writerWithDefaultPrettyPrinter()
+				message.messageReceive.msg = new ObjectMapper().writerWithDefaultPrettyPrinter()
 						.writeValueAsString(ListRoomUser);
 				message.messageReceive.To = message.messageReceive.From;
 				message.messageReceive.From="Server";
@@ -72,7 +77,7 @@ public class Rom extends Modules {
 		return false;
 	}
 
-	public List<String> SqlRequeteUser() {
+	private List<String> SqlRequeteUser() {
 
 		ResultSet result = SelectFromConnectTable();
 		List<String> listconnected = new ArrayList<String>();
