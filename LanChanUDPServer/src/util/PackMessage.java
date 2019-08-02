@@ -25,9 +25,10 @@ public class PackMessage {
 
 		try {
 			
-			String str = new String(_databyte,"UTF-8");			
-			byte[] data = str.getBytes(Charset.forName("UTF-8"));
-			Message messRecep = mapper.readValue(data, Message.class);
+			//String str = new String(_databyte);
+			String str = new String(_databyte,"UTF-8");
+			//byte[] data = str.getBytes(Charset.forName("UTF-8"));
+			Message messRecep = mapper.readValue(str, Message.class);
 			
 			
 			//Message messRecep = mapper.readValue(_databyte, Message.class);
